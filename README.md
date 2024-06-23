@@ -9,12 +9,12 @@ Node.js (>=14.x)
 npm (>=6.x)
 
 ## Clone the repository
-git clone https://github.com/your-repo/salary-insights-tests.git
+      git clone https://github.com/epeles/deel_home_assignment.git
 
-cd salary-insights-tests
+      cd salary-insights-tests
 
 ## Install dependencies
-npm install
+      npm install
 
 ## Running Tests
 Open Cypress Test Runner:
