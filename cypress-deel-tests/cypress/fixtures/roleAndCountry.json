@@ -1,0 +1,22 @@
+{
+  "roles": [
+      {
+          "role": "Accountant",
+          "country": "Brazil",
+          "countryAbbr": "BR",
+          "flagSrc": "brazil.svg"
+      },
+      {
+          "role": "QA Engineer",
+          "country": "Canada",
+          "countryAbbr": "CA",
+          "flagSrc": "canada.svg"
+      },
+      {
+          "role": "Software Engineer",
+          "country": "Japan",
+          "countryAbbr": "JP",
+          "flagSrc": "japan.svg"
+      }
+  ]
+}
