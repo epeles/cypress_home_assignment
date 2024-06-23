@@ -8,37 +8,37 @@ describe('Salary Insights', () => {
     cy.fixture('roleAndCountry').as('roleAndCountry');
   });
  
-    roleAndCountry.roles.forEach(({ role, country, countryAbbr, flagSrc }) => {
-      it(`Should display salary insights for ${role} in ${country}`, () => {
-        cy.wait(2500);
-  
-        // Select the role
-        cy.get("input[name='role']").click();
-        cy.get(`li[data-text='${role}']`).click();
-  
-        // Select the country
-        cy.get('input[name="country"]').type(`${country}{downArrow}{enter}`);
-  
-        // Submit the form
-        cy.get('button[type="submit"]').click();
-  
-        // Check that the correct country and role are displayed in the results
-        cy.contains('h2', country).should('be.visible');
-        cy.contains('p', country).should('be.visible');
-        cy.contains('h2', role).should('be.visible');
-        cy.contains('p', role).should('be.visible');
-        //Check that the according flag is displayed
-        cy.get(`img[src='https://s3.us-east-1.amazonaws.com/media.letsdeel.com/flags/${flagSrc}']`).should('be.visible')
+  roleAndCountry.roles.forEach(({ role, country, countryAbbr, flagSrc }) => {
+    it(`Should display salary insights for ${role} in ${country}`, () => {
+      cy.wait(2500);
 
-        cy.intercept('POST', 'https://api.eu.amplitude.com/2/httpapi').as('amplitudeApi');
-        // Wait for the API call and assert the payload
-        cy.wait('@amplitudeApi').then(interception => {
-          expect(interception.response.statusCode).to.equal(200); // assert the response is ok
-          const eventProperties = interception.request.body.events[0].event_properties;
-          expect(eventProperties.country).to.equal(`${countryAbbr}`); // Assert the country
-          expect(eventProperties.postion).to.equal(`${role}`);  // Assert the role
-        });
+      // Select the role
+      cy.get("input[name='role']").click();
+      cy.get(`li[data-text='${role}']`).click();
+
+      // Select the country
+      cy.get('input[name="country"]').type(`${country}{downArrow}{enter}`);
+
+      // Submit the form
+      cy.get('button[type="submit"]').click();
+
+      // Check that the correct country and role are displayed in the results
+      cy.contains('h2', country).should('be.visible');
+      cy.contains('p', country).should('be.visible');
+      cy.contains('h2', role).should('be.visible');
+      cy.contains('p', role).should('be.visible');
+      //Check that the according flag is displayed
+      cy.get(`img[src='https://s3.us-east-1.amazonaws.com/media.letsdeel.com/flags/${flagSrc}']`).should('be.visible')
+
+      cy.intercept('POST', 'https://api.eu.amplitude.com/2/httpapi').as('amplitudeApi');
+      // Wait for the API call and assert the payload
+      cy.wait('@amplitudeApi').then(interception => {
+        expect(interception.response.statusCode).to.equal(200); // assert the response is ok
+        const eventProperties = interception.request.body.events[0].event_properties;
+        expect(eventProperties.country).to.equal(`${countryAbbr}`); // Assert the country
+        expect(eventProperties.postion).to.equal(`${role}`);  // Assert the role
       });
+    });
   });
 
   it('Should display a validation message for empty input field', () => {
