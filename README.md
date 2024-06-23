@@ -9,30 +9,18 @@ npm (>=6.x)
 
 ## Clone the repository
 git clone https://github.com/your-repo/salary-insights-tests.git
+
 cd salary-insights-tests
 
 ## Install dependencies
 npm install
 
-## Configuration
-Create the roleAndCountry.json fixture
-
-In cypress/fixtures/roleAndCountry.json:
-
-{
-  "roles": [
-    { "role": "Accountant", "country": "Brazil", "countryAbbr": "BR", "flagSrc": "brazil.svg" },
-    { "role": "QA Engineer", "country": "Canada", "countryAbbr": "CA", "flagSrc": "canada.svg" },
-    { "role": "Software Engineer", "country": "Japan", "countryAbbr": "JP", "flagSrc": "japan.svg" }
-  ]
-}
-
 ## Running Tests
-Open Cypress Test Runner
-*npx cypress open*
+Open Cypress Test Runner:
+  *npx cypress open*
 
-Run tests in headless mode
-*npx cypress run*
+Run tests in headless mode:
+  *npx cypress run*
 
 ## Test Description
 The test suite iterates through multiple roles and countries, performing the following checks:
@@ -44,16 +32,16 @@ The test suite iterates through multiple roles and countries, performing the fol
 5. Intercepts and validates the Amplitude API call, checking the response status and payload.
 
 ## Directory Structure
-salary-insights-tests/
-├── cypress/
-│   ├── fixtures/
-│   │   └── roleAndCountry.json
-│   ├── integration/
-│   │   └── salaryInsights.spec.js
-│   ├── plugins/
-│   └── support/
-├── package.json
-└── README.md
+  salary-insights-tests/
+  ├── cypress/
+  │   ├── fixtures/
+  │   │   └── roleAndCountry.json
+  │   ├── integration/
+  │   │   └── salaryInsights.spec.js
+  │   ├── plugins/
+  │   └── support/
+  ├── package.json
+  └── README.md
 
 ## License
 This project is licensed under the MIT License.
