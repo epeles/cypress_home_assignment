@@ -1,20 +1,20 @@
-#Cypress Testing for Salary Insights
+# Cypress Testing for Salary Insights
 
-##Overview
+## Overview
 This project contains Cypress tests for verifying salary insights on the Deel training website. It checks for correct salary insights display for various roles and countries, ensures SVG images are displayed, and validates API calls.
 
-##Prerequisites
+## Prerequisites
 Node.js (>=14.x)
 npm (>=6.x)
-Installation
-Clone the repository
 
+## Clone the repository
 git clone https://github.com/your-repo/salary-insights-tests.git
 cd salary-insights-tests
-Install dependencies
 
+## Install dependencies
 npm install
-Configuration
+
+## Configuration
 Create the roleAndCountry.json fixture
 
 In cypress/fixtures/roleAndCountry.json:
@@ -26,15 +26,15 @@ In cypress/fixtures/roleAndCountry.json:
     { "role": "Software Engineer", "country": "Japan", "countryAbbr": "JP", "flagSrc": "japan.svg" }
   ]
 }
-##Running Tests
+
+## Running Tests
 Open Cypress Test Runner
+*npx cypress open*
 
-npx cypress open
 Run tests in headless mode
+*npx cypress run*
 
-npx cypress run
-
-#Test Description
+## Test Description
 The test suite iterates through multiple roles and countries, performing the following checks:
 
 1. Selects the role and country from dropdowns.
@@ -43,7 +43,7 @@ The test suite iterates through multiple roles and countries, performing the fol
 4. Ensures the corresponding flag image is visible.
 5. Intercepts and validates the Amplitude API call, checking the response status and payload.
 
-##Directory Structure
+## Directory Structure
 salary-insights-tests/
 ├── cypress/
 │   ├── fixtures/
@@ -55,9 +55,5 @@ salary-insights-tests/
 ├── package.json
 └── README.md
 
-##License
+## License
 This project is licensed under the MIT License.
-
-
-
-
