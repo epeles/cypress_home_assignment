@@ -19,11 +19,11 @@ npm install
 ## Running Tests
 Open Cypress Test Runner:
 
-      *npx cypress open*
+      npx cypress open
 
 Run tests in headless mode:
   
-      *npx cypress run*
+      npx cypress run
 
 ## Test Description
 The test suite iterates through multiple roles and countries, performing the following checks:
