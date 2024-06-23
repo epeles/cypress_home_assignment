@@ -5,6 +5,7 @@ This project contains Cypress tests for verifying salary insights on the Deel tr
 
 ## Prerequisites
 Node.js (>=14.x)
+
 npm (>=6.x)
 
 ## Clone the repository
@@ -17,9 +18,11 @@ npm install
 
 ## Running Tests
 Open Cypress Test Runner:
+
   *npx cypress open*
 
 Run tests in headless mode:
+  
   *npx cypress run*
 
 ## Test Description
@@ -32,16 +35,16 @@ The test suite iterates through multiple roles and countries, performing the fol
 5. Intercepts and validates the Amplitude API call, checking the response status and payload.
 
 ## Directory Structure
-  salary-insights-tests/
-  ├── cypress/
-  │   ├── fixtures/
-  │   │   └── roleAndCountry.json
-  │   ├── integration/
-  │   │   └── salaryInsights.spec.js
-  │   ├── plugins/
-  │   └── support/
-  ├── package.json
-  └── README.md
+     salary-insights-tests/
+     ├── cypress/
+     │   ├── fixtures/
+     │   │   └── roleAndCountry.json
+     │   ├── integration/
+     │   │   └── salaryInsights.spec.js
+     │   ├── plugins/
+     │   └── support/
+     ├── package.json
+     └── README.md
 
 ## License
 This project is licensed under the MIT License.
