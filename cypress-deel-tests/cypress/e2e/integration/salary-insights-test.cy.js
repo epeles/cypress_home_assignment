@@ -59,13 +59,15 @@ describe('Salary Insights', () => {
   });
 
   it('Clear button test', () => {
-    cy.wait(1500)
+    cy.wait(1500);
     cy.get("input[name='role']").click();
-    cy.get("li[data-text='Accountant']").click()
+    cy.get("li[data-text='Accountant']").click();
     cy.get('input[name="country"]').type('Brazil{downArrow}{enter}');
-    cy.get("button[title='Clear']").first().click({force: true})
-    cy.get("input").first().should('have.attr', 'value').and('equal', '');
-    cy.get("button[title='Clear']").last().click({force: true})
-    cy.get("input").last().should('have.attr', 'value').and('equal', '');
+    cy.get("button[title='Clear']").first().click({ force: true }).then(() => {
+      cy.get("input").first().should('have.attr', 'value').and('equal', '');
+    });
+    cy.get("button[title='Clear']").last().click({ force: true }).then(() => {
+      cy.get("input").last().should('have.attr', 'value').and('equal', '');
+    });
   });  
 });
