@@ -26,11 +26,11 @@ describe('Salary Insights', () => {
       //Check that the according flag is displayed
       cy.get(`img[src='https://s3.us-east-1.amazonaws.com/media.letsdeel.com/flags/${flagSrc}']`).should('be.visible')
 
-      cy.intercept('POST', 'https://api.eu.amplitude.com/2/httpapi').as('amplitudeApi');
+      cy.intercept('POST', 'https://api.eu.amplitude.com/2/httpapi').as('apiCall');
       // Wait for the API call and assert the payload
-      cy.wait('@amplitudeApi').then(interception => {
-        expect(interception.response.statusCode).to.equal(200); // assert the response is ok
-        const eventProperties = interception.request.body.events[0].event_properties;
+      cy.wait('@apiCall').then(req => {
+        expect(req.response.statusCode).to.equal(200); // assert the response is ok
+        const eventProperties = req.request.body.events[0].event_properties;
         expect(eventProperties.country).to.equal(`${countryAbbr}`); // Assert the country
         expect(eventProperties.postion).to.equal(`${role}`);  // Assert the role
       });
@@ -59,8 +59,8 @@ describe('Salary Insights', () => {
     cy.get("input[name='country']").click();
     cy.contains('p', 'Brazil').click()
     cy.get("button[title='Clear']").first().click({force: true})
-    cy.get("input[name='role']").should('have.value', '')
+    cy.get("input[name='role']").should('have.value', '') //make sure the input is empty
     cy.get("button[title='Clear']").last().click({force: true})
-    cy.get("input[name='country']").should('have.value', '')
+    cy.get("input[name='country']").should('have.value', '') //make sure the input is empty
   });  
 });
