@@ -9,14 +9,11 @@ describe('Salary Insights', () => {
  
   roleAndCountry.roles.forEach(({ role, country, countryAbbr, flagSrc }) => {
     it(`Should display salary insights for ${role} in ${country}`, () => {
-      cy.wait(2500);
-
+      cy.wait(1500);
       cy.get("input[name='role']").click(); // Select the role
       cy.get(`li[data-text='${role}']`).click();
-
       cy.get("input[name='country']").click(); // Select the country
-      cy.contains('p', country).click()
-      
+      cy.contains('p', country).click()   
       cy.get('button[type="submit"]').click(); // Submit the form
 
       // Check that the correct country and role are displayed in the results
@@ -42,8 +39,8 @@ describe('Salary Insights', () => {
 
   it('Should display a validation message for empty input field', () => {
     //make sure the fields are empty
-    cy.get("input").first().should('have.attr', 'value').and('equal', ''); 
-    cy.get("input").last().should('have.attr', 'value').and('equal', '');
+    cy.get("input").first().should('have.value', '') 
+    cy.get("input").last().should('have.value', '')
     cy.get('button[type="submit"]').click();
     
     const errorMsg = ['Role', 'Country']   
