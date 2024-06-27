@@ -1,4 +1,3 @@
-require('cypress-xpath')
 import roleAndCountry from '../../fixtures/roleAndCountry.json'
 describe('Salary Insights', () => {
   const baseUrl = 'https://growth.deel.training/dev/salary-insights';
@@ -12,21 +11,21 @@ describe('Salary Insights', () => {
     it(`Should display salary insights for ${role} in ${country}`, () => {
       cy.wait(2500);
 
-      // Select the role
-      cy.get("input[name='role']").click();
+      cy.get("input[name='role']").click(); // Select the role
       cy.get(`li[data-text='${role}']`).click();
 
-      // Select the country
-      cy.get('input[name="country"]').type(`${country}{downArrow}{enter}`);
-
-      // Submit the form
-      cy.get('button[type="submit"]').click();
+      cy.get("input[name='country']").click(); // Select the country
+      cy.contains('p', country).click()
+      
+      cy.get('button[type="submit"]').click(); // Submit the form
 
       // Check that the correct country and role are displayed in the results
-      cy.contains('h2', country).should('be.visible');
-      cy.contains('p', country).should('be.visible');
-      cy.contains('h2', role).should('be.visible');
-      cy.contains('p', role).should('be.visible');
+      const locatorsText = ['h2','h3','p']
+      locatorsText.forEach(locator => {
+        cy.get(locator)
+        .should('contains.text',country)
+        .and('contains.text',role);
+      })
       //Check that the according flag is displayed
       cy.get(`img[src='https://s3.us-east-1.amazonaws.com/media.letsdeel.com/flags/${flagSrc}']`).should('be.visible')
 
@@ -47,27 +46,24 @@ describe('Salary Insights', () => {
     cy.get("input").last().should('have.attr', 'value').and('equal', '');
     cy.get('button[type="submit"]').click();
     
-    cy.xpath("//p[text()='Role is required']")
-    .should('have.css', 'color', 'rgb(227, 0, 4)')
-    .and('have.css', 'font-size', '12px' )
-    .and('have.css', 'font-weight', '400' )
-
-    cy.xpath("//p[text()='Country is required']")
-    .should('have.css', 'color', 'rgb(227, 0, 4)' )
-    .and('have.css', 'font-size', '12px' )
-    .and('have.css', 'font-weight', '400' )
+    const errorMsg = ['Role', 'Country']   
+    errorMsg.forEach(msg => {
+      cy.get('p').contains(`${msg} is required`)
+      .should('have.css', 'color', 'rgb(227, 0, 4)')
+      .and('have.css', 'font-size', '12px' )
+      .and('have.css', 'font-weight', '400' )
+    })
   });
 
   it('Clear button test', () => {
-    cy.wait(1500);
+    cy.wait(1500)
     cy.get("input[name='role']").click();
-    cy.get("li[data-text='Accountant']").click();
-    cy.get('input[name="country"]').type('Brazil{downArrow}{enter}');
-    cy.get("button[title='Clear']").first().click({ force: true }).then(() => {
-      cy.get("input").first().should('have.attr', 'value').and('equal', '');
-    });
-    cy.get("button[title='Clear']").last().click({ force: true }).then(() => {
-      cy.get("input").last().should('have.attr', 'value').and('equal', '');
-    });
+    cy.get("li[data-text='Accountant']").click()
+    cy.get("input[name='country']").click();
+    cy.contains('p', 'Brazil').click()
+    cy.get("button[title='Clear']").first().click({force: true})
+    cy.get("input[name='role']").should('have.value', '')
+    cy.get("button[title='Clear']").last().click({force: true})
+    cy.get("input[name='country']").should('have.value', '')
   });  
 });
