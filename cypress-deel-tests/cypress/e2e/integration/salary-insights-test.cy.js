@@ -1,5 +1,3 @@
-// cypress/integration/salaryInsights.spec.js
-
 import SalaryInsightsPage from '../../support/pages/salaryInsightsPage.js';
 import roleAndCountry from '../../fixtures/roleAndCountry.json';
 
