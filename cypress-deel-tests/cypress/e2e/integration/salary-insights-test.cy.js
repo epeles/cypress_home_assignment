@@ -11,7 +11,7 @@ describe('Salary Insights', () => {
 
   roleAndCountry.roles.forEach(({ role, country, countryAbbr, flagSrc }) => {
     it(`Should display salary insights for ${role} in ${country}`, () => {
-      cy.wait(1500);
+      cy.wait(2500);
       salaryInsightsPage.selectRole(role);
       salaryInsightsPage.selectCountry(country);
       salaryInsightsPage.submitForm();
@@ -34,11 +34,16 @@ describe('Salary Insights', () => {
   });
 
   it('Clear button test', () => {
-    cy.wait(1500);
-    salaryInsightsPage.selectRole('Accountant');
-    salaryInsightsPage.selectCountry('Brazil');
-    salaryInsightsPage.clearInputs();
-    cy.get("input[name='role']").should('have.value', '');
-    cy.get("input[name='country']").should('have.value', '');
+    cy.wait(2500);
+    cy.get('@roleAndCountry').then((fixtureData) => {
+      const firstRole = fixtureData.roles[0];
+      salaryInsightsPage.selectRole(firstRole.role);
+      salaryInsightsPage.selectCountry(firstRole.country);
+      salaryInsightsPage.clearInputs();
+      cy.get("input[name='role']").should('have.value', '');
+      cy.get("input[name='country']").should('have.value', '');
+    });
   });
 });
+
+export default salaryInsightsPage;

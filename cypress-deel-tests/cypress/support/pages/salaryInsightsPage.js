@@ -29,7 +29,7 @@ class SalaryInsightsPage {
     }
   
     verifyFlag(flagSrc) {
-      cy.get(`img[src='https://s3.us-east-1.amazonaws.com/media.letsdeel.com/flags/${flagSrc}']`).should('be.visible');
+      cy.get(`img[src='https://media.letsdeel.com/flags/${flagSrc}']`).should('be.visible');
     }
   
     interceptApiCall() {
